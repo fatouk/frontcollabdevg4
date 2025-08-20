@@ -7,7 +7,6 @@ WORKDIR /app
 COPY package*.json ./
 
 # Installer les dépendances
-#RUN npm install
 RUN npm install --legacy-peer-deps
 
 # Copier tout le code source
@@ -19,14 +18,16 @@ RUN npm run build -- --output-path=dist/collabdev_frontend/browser --configurati
 # Étape 2 : serveur Nginx pour servir les fichiers statiques
 FROM nginx:alpine
 
-# Copier le build Angular dans le dossier Nginx
-COPY --from=build /dist/collabdev_frontend/browser /usr/share/nginx/html
+# Supprimer le contenu par défaut de Nginx
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copier le fichier de config Nginx pour Angular (fallback sur index.html)
+# Copier le build Angular dans le dossier Nginx
+COPY --from=build /app/dist/collabdev_frontend/browser /usr/share/nginx/html
+
+# Copier la config Nginx custom
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-
-# Exposer le port 8089 (Render utilisera PORT)
+# Exposer le port (Render redirige automatiquement vers $PORT)
 EXPOSE 8089
 
 # Lancer Nginx

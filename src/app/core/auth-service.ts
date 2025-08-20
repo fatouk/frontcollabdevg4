@@ -9,11 +9,11 @@ export class AuthService {
   private authState = new BehaviorSubject<boolean>(false);
   authState$ = this.authState.asObservable();
   
-  private apiUrl = 'http://localhost:8080/api/v1/auth';
+  private apiUrl = 'https://apicollabdev-2.onrender.com/api/v1/auth';
 
   constructor(private http: HttpClient) {}
 loginWithGoogle(userData: any) {
-  return this.http.post<any>('http://localhost:8080/api/v1/auth/login', userData);
+  return this.http.post<any>('https://apicollabdev-2.onrender.com/api/v1/auth/login', userData);
 }
 
   // Récupère le profil par ID
