@@ -1,0 +1,25 @@
+<div id="team" class="tab-content">
+  <div class="team-header">
+    <h2>Équipe du Projet</h2>
+    <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Inviter un membre</button>
+  </div>
+
+  <div class="team-stats">
+    <div class="stat-card">
+      <div class="stat-value">{{ participants.length }}</div>
+      <div class="stat-label">Membres</div>
+    </div>
+    <!-- Autres stats si nécessaire -->
+  </div>
+
+  <div class="participants-list">
+    <h3>Liste des participants</h3>
+    <ul>
+      <li *ngFor="let p of participants">
+        <strong>{{ p.contributeurPrenom }} {{ p.contributeurNom }}</strong> -
+        {{ p.profil }} - Statut: {{ p.statut }} - Score Quiz: {{ p.scoreQuiz }}
+        <span *ngIf="p.estDebloque">✔️ Débloqué</span>
+      </li>
+    </ul>
+  </div>
+</div>

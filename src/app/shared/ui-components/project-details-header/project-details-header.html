@@ -1,0 +1,76 @@
+<section class="project-header">
+  <div *ngIf="loading" class="loading">
+    <i class="fas fa-spinner fa-spin"></i> Chargement...
+  </div>
+
+  <div *ngIf="!loading && error" class="error">
+    <i class="fas fa-exclamation-triangle"></i> Impossible de charger le projet.
+  </div>
+
+  <div *ngIf="!loading && !error && project" class="info">
+    <div class="back-button" (click)="goBack()">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+
+    <div class="project-title">
+      <h1>{{ project.titre }}</h1>
+      <div class="project-meta">
+        <span class="project-category" [ngClass]="getSecteurClass(project.secteur)">
+          <i [ngClass]="getSecteurIcon(project.secteur)"></i>
+          {{ project.secteur | secteurDisplay }}
+        </span>
+
+        <span class="project-status" [ngClass]="getStatusClass(project.status)">
+          <i
+            class="fas"
+            [class.fa-sync-alt]="project.status === 'EN_COURS'"
+            [class.fa-check-circle]="project.status === 'TERMINE'"
+            [class.fa-clock]="project.status === 'EN_ATTENTE'"
+            [class.fa-spin]="project.status === 'EN_COURS'"
+          ></i>
+          {{ project.status | statutDisplay }}
+        </span>
+
+        <span class="project-date">
+          <i class="far fa-calendar-alt"></i>
+          Lancé le {{ project.dateCreation | date:'dd/MM/yyyy' }}
+        </span>
+      </div>
+    </div>
+
+    
+  </div>
+  <div class="project-actions">
+      <button class="btn btn-tasks" routerLink="/workspace-project">
+        <i class="fas fa-tasks"></i> Tâches
+      </button>
+      <button class="btn btn-share" (click)="openShareModal()">
+        <i class="fas fa-share-alt"></i> Partager
+      </button>
+      <button class="btn btn-favorite" title="Ajouter aux favoris">
+        <i class="far fa-star"></i>
+      </button>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="showShareModal" (click)="closeShareModal()"></div>
+<div class="modal" *ngIf="showShareModal" (click)="$event.stopPropagation()">
+  <h3>Partager le projet</h3>
+  <p>{{ project?.titre }}</p>
+  <div class="share-buttons">
+    <button class="facebook" (click)="share('facebook')">
+      <i class="fab fa-facebook-f"></i> Facebook
+    </button>
+    <button class="twitter" (click)="share('twitter')">
+      <i class="fab fa-twitter"></i> Twitter
+    </button>
+    <button class="linkedin" (click)="share('linkedin')">
+      <i class="fab fa-linkedin-in"></i> LinkedIn
+    </button>
+    <button class="whatsapp" (click)="share('whatsapp')">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </button>
+  </div>
+  <button class="btn-close" (click)="closeShareModal()">Fermer</button>
+</div>

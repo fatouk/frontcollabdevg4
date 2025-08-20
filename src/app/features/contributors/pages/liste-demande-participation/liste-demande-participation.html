@@ -1,0 +1,72 @@
+<div class="container">
+  <!-- Header avec bouton retour -->
+  <div class="header">
+    <button class="back-button" (click)="goBack()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="title">Mes participants</h1>
+  </div>
+
+  <!-- Barre de recherche et filtre -->
+  <div class="search-container">
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input [(ngModel)]="searchQuery" (input)="filterCandidates()"
+             placeholder="Rechercher...">
+      <select [(ngModel)]="statusFilter" (change)="filterCandidates()">
+        <option value="all">Tous</option>
+        <option value="pending">En attente</option>
+        <option value="approved">Approuvé</option>
+        <option value="rejected">Rejeté</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Liste des candidats -->
+  <div class="candidates-list">
+    <div *ngFor="let candidate of filteredCandidates" class="candidate-card">
+      <div class="candidate-info">
+        <div class="main-info">
+          <h3>{{ candidate.name }}</h3>
+          <p>{{ candidate.email }}</p>
+          <small>Postulé le: {{ candidate.date }}</small>
+        </div>
+        <div class="status-info">
+          <span class="score">{{ candidate.score }}/100</span>
+          <span class="status-badge" [ngClass]="candidate.status">
+            {{ getStatusText(candidate.status) }}
+          </span>
+        </div>
+      </div>
+      <div class="actions">
+        <button *ngIf="candidate.status === 'pending'" (click)="updateStatus(candidate.id, 'approved')" class="btn-success">
+          <i class="fas fa-check"></i>
+        </button>
+        <button *ngIf="candidate.status === 'pending'" (click)="updateStatus(candidate.id, 'rejected')" class="btn-danger">
+          <i class="fas fa-times"></i>
+        </button>
+        <button *ngIf="candidate.status !== 'pending'" (click)="notify(candidate.id)" class="btn-notify">
+          <i class="fas fa-bell"></i>
+          <span *ngIf="candidate.notifications > 0" class="badge">
+            {{ candidate.notifications }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <span *ngFor="let page of pages"
+          [class.active]="page === currentPage"
+          (click)="goToPage(page)">
+      {{ page }}
+    </span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>

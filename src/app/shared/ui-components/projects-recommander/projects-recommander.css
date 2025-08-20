@@ -1,0 +1,150 @@
+.projects-container {
+  max-width: 1200px;
+  margin: auto;
+  
+}
+
+/* Liste des cartes */
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Carte */
+.card {
+  width: 290px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Haut de carte */
+.titres {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+}
+
+/* Catégorie */
+.category {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.category.sante { background: #FFEBEE; color: #C62828; }
+.category.web { background: #E3F2FD; color: #1565C0; }
+.category.informatique { background: #F3E5F5; color: #7B1FA2; }
+.category.finance { background: #E8F5E9; color: #2E7D32; }
+.category.education { background: #FFF8E1; color: #FF8F00; }
+.category.default { background: #F5F5F5; color: #424242; }
+
+/* Coins */
+.coins {
+  display: flex;
+  align-items: center;
+  color: #FF9800;
+  font-weight: bold;
+}
+.coins mat-icon {
+  font-size: 1.1rem;
+  margin-right: 4px;
+}
+
+/* Ligne séparatrice */
+.divider {
+  height: 1px;
+  background: #E0E0E0;
+  margin: 0 18px;
+}
+
+/* Info */
+.info {
+  padding: 10px 18px;
+}
+.info h1 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+.info .description {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Détails (niveau, secteur, statut) */
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 18px;
+}
+.badge {
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.badge.niveau {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+.badge.secteur {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+.badge.statut {
+  background: #FFF3E0;
+  color: #EF6C00;
+}
+.badge.statut.en_attente {
+  background: #FFF3E0;
+  color: #EF6C00;
+}
+.badge.statut.termine {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+/* Bouton */
+.buttons {
+  padding: 15px 18px;
+}
+.buttons button {
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  background: none;
+  transition: 0.3s;
+}
+.buttons button:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .projects-grid {
+    justify-content: center;
+  }
+}
