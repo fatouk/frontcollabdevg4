@@ -28,7 +28,7 @@ COPY --from=build /app/dist/collabdev_frontend/browser /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Exposer le port (Render redirige automatiquement vers $PORT)
-EXPOSE 8089
+EXPOSE 8080
 
 # Lancer Nginx
 CMD ["nginx", "-g", "daemon off;"]
