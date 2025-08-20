@@ -14,16 +14,17 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Compiler l'application pour la prod
-RUN npm run build -- --output-path=dist --configuration production
+RUN npm run build -- --output-path=dist/collabdev_frontend/browser --configuration production
 
 # Étape 2 : serveur Nginx pour servir les fichiers statiques
 FROM nginx:alpine
 
 # Copier le build Angular dans le dossier Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist/collabdev_frontend/browser /usr/share/nginx/html
 
 # Copier le fichier de config Nginx pour Angular (fallback sur index.html)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 
 # Exposer le port 8089 (Render utilisera PORT)
 EXPOSE 8089
