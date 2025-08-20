@@ -20,7 +20,7 @@ RUN npm run build -- --output-path=dist/collabdev_frontend/browser --configurati
 FROM nginx:alpine
 
 # Copier le build Angular dans le dossier Nginx
-COPY --from=build /app/dist/collabdev_frontend/browser /usr/share/nginx/html
+COPY --from=build /dist/collabdev_frontend/browser /usr/share/nginx/html
 
 # Copier le fichier de config Nginx pour Angular (fallback sur index.html)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
