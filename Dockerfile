@@ -11,9 +11,12 @@ RUN npm install --legacy-peer-deps
 
 # Copier tout le code source
 COPY . .
+COPY . .
+RUN npm run build:ssr
+
 
 # Compiler l'application pour la prod
-RUN npm run build -- --output-path=app/dist/collabdev_frontend/browser --configuration production
+#RUN npm run build -- --output-path=app/dist/collabdev_frontend/browser --configuration production
 
 # Étape 2 : serveur Nginx pour servir les fichiers statiques
 FROM nginx:alpine
@@ -32,3 +35,5 @@ EXPOSE 8080
 
 # Lancer Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
+
