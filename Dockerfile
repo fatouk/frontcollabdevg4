@@ -11,8 +11,7 @@ RUN npm install --legacy-peer-deps
 
 # Copier tout le code source
 COPY . .
-COPY . .
-RUN npm run build:ssr
+RUN npm run build --configuration production
 
 
 # Compiler l'application pour la prod
