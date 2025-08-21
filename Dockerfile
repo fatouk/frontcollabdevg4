@@ -11,7 +11,7 @@ RUN npm install --legacy-peer-deps
 
 # Copier tout le code source
 COPY . .
-RUN npm run ng build collabdev_frontend --configuration production
+RUN npx ng build collabdev_frontend --configuration production
 
 
 # Compiler l'application pour la prod
